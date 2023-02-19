@@ -10,7 +10,7 @@ class EventHandler(tcod.event.EventDispatch[Action]):
         action: Optional[Action] = None
 
         key = event.sym
-        match key:
+        match key:    # added numpad diagonals as acceptable input
             case tcod.event.K_KP_9:
                 action = MovementAction(dx=1,dy=-1)
             case tcod.event.K_KP_7:
