@@ -10,17 +10,24 @@ class EventHandler(tcod.event.EventDispatch[Action]):
         action: Optional[Action] = None
 
         key = event.sym
-
-        if key == tcod.event.K_UP:
-            action = MovementAction(dx=0, dy=-1)
-        elif key == tcod.event.K_DOWN:
-            action = MovementAction(dx=0, dy=1)
-        elif key == tcod.event.K_LEFT:
-            action = MovementAction(dx=-1, dy=0)
-        elif key == tcod.event.K_RIGHT:
-            action = MovementAction(dx=1, dy=0)
-
-        elif key == tcod.event.K_ESCAPE:
-            action = EscapeAction()
+        match key:
+            case tcod.event.K_KP_9:
+                action = MovementAction(dx=1,dy=-1)
+            case tcod.event.K_KP_7:
+                action = MovementAction(dx=-1,dy=-1)
+            case tcod.event.K_KP_1:
+                action = MovementAction(dx=-1,dy=1)
+            case tcod.event.K_KP_3:
+                action = MovementAction(dx=1,dy=1) 
+            case tcod.event.K_UP | tcod.event.K_KP_8:
+                action = MovementAction(dx=0, dy=-1)
+            case tcod.event.K_DOWN | tcod.event.K_KP_2:
+                action = MovementAction(dx=0, dy=1)
+            case tcod.event.K_LEFT | tcod.event.K_KP_4:
+                action = MovementAction(dx=-1, dy=0)
+            case tcod.event.K_RIGHT | tcod.event.K_KP_6:
+                action = MovementAction(dx=1, dy=0)
+            case tcod.event.K_ESCAPE:
+                action = EscapeAction()
 
         return action
